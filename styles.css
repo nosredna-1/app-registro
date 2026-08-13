@@ -1,0 +1,159 @@
+:root {
+  --bg: #0f1115;
+  --card: #181b22;
+  --border: #2a2f3a;
+  --text: #e8eaed;
+  --muted: #9aa3b2;
+  --accent: #4c8dff;
+  --wa: #25d366;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f4f5f7;
+    --card: #ffffff;
+    --border: #dfe3e8;
+    --text: #1a1c20;
+    --muted: #666e7a;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0 0 3rem;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 10;
+}
+
+h1 { font-size: 1.1rem; margin: 0; }
+h2 { font-size: 0.95rem; margin: 0 0 0.75rem; color: var(--muted); font-weight: 600; }
+
+main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+label {
+  display: block;
+  font-size: 0.85rem;
+  margin: 0.75rem 0 0.25rem;
+  color: var(--muted);
+}
+label:first-of-type { margin-top: 0; }
+
+input[type="text"], input[type="tel"], input[type="password"], select {
+  width: 100%;
+  padding: 0.7rem 0.8rem;
+  font-size: 1rem;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+input:focus, select:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+button, .btn {
+  flex: 1 1 auto;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  padding: 0.7rem 1rem;
+  font-size: 0.95rem;
+  font-family: inherit;
+  font-weight: 600;
+  color: #fff;
+  background: var(--accent);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:active, .btn:active { transform: translateY(1px); }
+
+.ghost {
+  background: transparent;
+  color: var(--muted);
+  border-color: var(--border);
+}
+
+.btn.wa { background: var(--wa); color: #04310f; }
+
+.disabled {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.hint {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0.5rem 0 0;
+}
+
+.hint a { color: var(--accent); }
+
+.hidden { display: none !important; }
+
+#scanner-wrap { margin-bottom: 0.5rem; }
+
+video, #lienzo {
+  display: block;
+  width: 100%;
+  max-height: 45vh;
+  object-fit: contain;
+  background: #000;
+  border-radius: 8px;
+  margin-top: 0.5rem;
+}
+
+/* Sin esto, arrastrar el dedo sobre el lienzo hace scroll en vez de dibujar. */
+#lienzo { touch-action: none; }
+
+button.activa {
+  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.ok { color: var(--wa); }
+.err { color: #ff6b6b; }

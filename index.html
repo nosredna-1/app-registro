@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Registro de productos</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <h1>Registro de productos</h1>
+  <button id="btn-config" class="ghost" type="button">API key</button>
+</header>
+
+<main>
+
+  <!-- Configuración -->
+  <section id="config" class="card hidden">
+    <label for="apikey">Gemini API key</label>
+    <input id="apikey" type="password" placeholder="AIza..." autocomplete="off">
+    <p class="hint">Se guarda solo en este navegador (localStorage). Consíguela en
+      <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">Google AI Studio</a>.</p>
+    <div class="row">
+      <button id="btn-save-key" type="button">Guardar</button>
+      <button id="btn-clear-key" class="ghost" type="button">Borrar</button>
+    </div>
+  </section>
+
+  <!-- 1. Código de barras -->
+  <section class="card">
+    <h2>1 · Código de barras</h2>
+    <div id="scanner-wrap" class="hidden">
+      <video id="video" playsinline autoplay muted></video>
+    </div>
+    <div class="row">
+      <button id="btn-scan" type="button">Escanear con cámara</button>
+      <button id="btn-scan-stop" class="ghost hidden" type="button">Detener</button>
+    </div>
+    <p id="scan-status" class="hint"></p>
+  </section>
+
+  <!-- 2. OCR -->
+  <section class="card">
+    <h2>2 · Leer etiqueta (OCR)</h2>
+    <p class="hint">Toma una foto de la etiqueta o empaque. Antes de enviarla puedes
+      recortarla y tachar lo que no deba salir.</p>
+    <div class="row">
+      <label class="btn" for="photo">Tomar / subir foto</label>
+      <input id="photo" type="file" accept="image/*" capture="environment" hidden>
+    </div>
+
+    <div id="editor" class="hidden">
+      <canvas id="lienzo"></canvas>
+
+      <div class="row">
+        <button id="tool-tachar" class="ghost activa" type="button">Tachar</button>
+        <button id="tool-recortar" class="ghost" type="button">Recortar</button>
+        <button id="btn-deshacer" class="ghost" type="button" disabled>Deshacer</button>
+      </div>
+      <p id="editor-hint" class="hint">Arrastra el dedo sobre lo que quieras ocultar.</p>
+
+      <div class="row">
+        <button id="btn-recorte-aplicar" class="ghost hidden" type="button">Aplicar recorte</button>
+      </div>
+      <div class="row">
+        <button id="btn-analizar" type="button">Analizar con Gemini</button>
+      </div>
+    </div>
+
+    <p id="ocr-status" class="hint"></p>
+  </section>
+
+  <!-- 3. Datos -->
+  <section class="card">
+    <h2>3 · Datos del producto</h2>
+    <label for="codigo-barras">Código de barras</label>
+    <input id="codigo-barras" type="text" inputmode="numeric" placeholder="7501234567890">
+
+    <label for="codigo-factura">Código factura</label>
+    <input id="codigo-factura" type="text" placeholder="F-00123">
+
+    <label for="nombre">Nombre</label>
+    <input id="nombre" type="text" placeholder="Nombre del producto">
+
+    <label for="presentacion">Presentación</label>
+    <input id="presentacion" type="text" placeholder="500 ml / caja x12">
+
+    <label for="cantidad">Cantidad</label>
+    <input id="cantidad" type="text" inputmode="decimal" placeholder="1">
+
+    <label for="precio-factura">Precio factura</label>
+    <input id="precio-factura" type="text" inputmode="decimal" placeholder="0.00">
+
+    <label for="precio-final">Precio final</label>
+    <input id="precio-final" type="text" inputmode="decimal" placeholder="0.00">
+
+    <button id="btn-reset" class="ghost" type="button">Limpiar todo</button>
+  </section>
+
+  <!-- 4. Acciones -->
+  <section class="card">
+    <h2>4 · Acciones</h2>
+    <label for="telefono">WhatsApp destino</label>
+    <input id="telefono" type="tel" inputmode="tel" placeholder="3203210196">
+    <div class="row">
+      <a id="link-google" class="btn disabled" target="_blank" rel="noopener">Buscar en Google</a>
+      <a id="link-whatsapp" class="btn wa disabled" target="_blank" rel="noopener">Enviar por WhatsApp</a>
+    </div>
+  </section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@zxing/library@0.21.3/umd/index.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
